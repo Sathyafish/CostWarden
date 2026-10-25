@@ -1,0 +1,636 @@
+{
+  "_note": "Synthetic data for CostWarden demos. Shapes follow AWS Cost Explorer GetRightsizingRecommendation (EC2) and Cost Optimization Hub ListRecommendations (everything else). Not real AWS output.",
+  "generatedAt": "2026-10-24T06:00:00Z",
+  "lookbackPeriodInDays": "14",
+  "accounts": [
+    {
+      "id": "111111111111",
+      "name": "costwarden-prototype"
+    },
+    {
+      "id": "222222222222",
+      "name": "costwarden-secondary"
+    }
+  ],
+  "rightsizing": {
+    "RightsizingRecommendations": [
+      {
+        "AccountId": "111111111111",
+        "CurrentInstance": {
+          "ResourceId": "i-0a1b2c3d4e5f60001",
+          "InstanceName": "web-api-prod",
+          "Tags": [
+            {
+              "Key": "ManagedBy",
+              "Values": [
+                "terraform"
+              ]
+            },
+            {
+              "Key": "tf_address",
+              "Values": [
+                "aws_instance.web_api"
+              ]
+            }
+          ],
+          "ResourceDetails": {
+            "EC2ResourceDetails": {
+              "InstanceType": "m5.2xlarge",
+              "Region": "us-east-1",
+              "Platform": "Linux/UNIX",
+              "Sku": "",
+              "Memory": 32,
+              "NetworkPerformance": "Up to 10 Gigabit"
+            }
+          },
+          "ResourceUtilization": {
+            "EC2ResourceUtilization": {
+              "MaxCpuUtilizationPercentage": "11.2",
+              "MaxMemoryUtilizationPercentage": "0",
+              "MaxStorageUtilizationPercentage": "0"
+            }
+          },
+          "OnDemandHoursInLookbackPeriod": "336.0",
+          "ReservationCoveredHoursInLookbackPeriod": "0.0",
+          "SavingsPlansCoveredHoursInLookbackPeriod": "0.0",
+          "TotalRunningHoursInLookbackPeriod": "336.0",
+          "MonthlyCost": "280.32",
+          "CurrencyCode": "USD"
+        },
+        "RightsizingType": "MODIFY",
+        "FindingReasonCodes": [
+          "CPU_OVER_PROVISIONED"
+        ],
+        "ModifyRecommendationDetail": {
+          "TargetInstances": [
+            {
+              "EstimatedMonthlyCost": "70.08",
+              "EstimatedMonthlySavings": "210.24",
+              "CurrencyCode": "USD",
+              "DefaultTargetInstance": true,
+              "ResourceDetails": {
+                "EC2ResourceDetails": {
+                  "InstanceType": "m5.large",
+                  "Region": "us-east-1",
+                  "Platform": "Linux/UNIX"
+                }
+              },
+              "ExpectedResourceUtilization": {
+                "EC2ResourceUtilization": {
+                  "MaxCpuUtilizationPercentage": "44.8"
+                }
+              },
+              "PlatformDifferences": []
+            }
+          ]
+        }
+      },
+      {
+        "AccountId": "111111111111",
+        "CurrentInstance": {
+          "ResourceId": "i-0a1b2c3d4e5f60002",
+          "InstanceName": "batch-worker",
+          "Tags": [
+            {
+              "Key": "ManagedBy",
+              "Values": [
+                "terraform"
+              ]
+            },
+            {
+              "Key": "tf_address",
+              "Values": [
+                "aws_instance.batch_worker"
+              ]
+            }
+          ],
+          "ResourceDetails": {
+            "EC2ResourceDetails": {
+              "InstanceType": "c5.4xlarge",
+              "Region": "us-east-1",
+              "Platform": "Linux/UNIX",
+              "Sku": "",
+              "Memory": 32,
+              "NetworkPerformance": "Up to 10 Gigabit"
+            }
+          },
+          "ResourceUtilization": {
+            "EC2ResourceUtilization": {
+              "MaxCpuUtilizationPercentage": "8.4",
+              "MaxMemoryUtilizationPercentage": "0",
+              "MaxStorageUtilizationPercentage": "0"
+            }
+          },
+          "OnDemandHoursInLookbackPeriod": "336.0",
+          "ReservationCoveredHoursInLookbackPeriod": "0.0",
+          "SavingsPlansCoveredHoursInLookbackPeriod": "0.0",
+          "TotalRunningHoursInLookbackPeriod": "336.0",
+          "MonthlyCost": "496.40",
+          "CurrencyCode": "USD"
+        },
+        "RightsizingType": "MODIFY",
+        "FindingReasonCodes": [
+          "CPU_OVER_PROVISIONED"
+        ],
+        "ModifyRecommendationDetail": {
+          "TargetInstances": [
+            {
+              "EstimatedMonthlyCost": "124.10",
+              "EstimatedMonthlySavings": "372.30",
+              "CurrencyCode": "USD",
+              "DefaultTargetInstance": true,
+              "ResourceDetails": {
+                "EC2ResourceDetails": {
+                  "InstanceType": "c5.xlarge",
+                  "Region": "us-east-1",
+                  "Platform": "Linux/UNIX"
+                }
+              },
+              "ExpectedResourceUtilization": {
+                "EC2ResourceUtilization": {
+                  "MaxCpuUtilizationPercentage": "33.6"
+                }
+              },
+              "PlatformDifferences": []
+            }
+          ]
+        }
+      },
+      {
+        "AccountId": "111111111111",
+        "CurrentInstance": {
+          "ResourceId": "i-0a1b2c3d4e5f60003",
+          "InstanceName": "dev-bastion",
+          "Tags": [
+            {
+              "Key": "ManagedBy",
+              "Values": [
+                "terraform"
+              ]
+            },
+            {
+              "Key": "tf_address",
+              "Values": [
+                "aws_instance.dev_bastion"
+              ]
+            }
+          ],
+          "ResourceDetails": {
+            "EC2ResourceDetails": {
+              "InstanceType": "t3.large",
+              "Region": "us-east-1",
+              "Platform": "Linux/UNIX",
+              "Sku": "",
+              "Memory": 8,
+              "NetworkPerformance": "Up to 10 Gigabit"
+            }
+          },
+          "ResourceUtilization": {
+            "EC2ResourceUtilization": {
+              "MaxCpuUtilizationPercentage": "0.9",
+              "MaxMemoryUtilizationPercentage": "0",
+              "MaxStorageUtilizationPercentage": "0"
+            }
+          },
+          "OnDemandHoursInLookbackPeriod": "336.0",
+          "ReservationCoveredHoursInLookbackPeriod": "0.0",
+          "SavingsPlansCoveredHoursInLookbackPeriod": "0.0",
+          "TotalRunningHoursInLookbackPeriod": "336.0",
+          "MonthlyCost": "60.74",
+          "CurrencyCode": "USD"
+        },
+        "RightsizingType": "TERMINATE",
+        "FindingReasonCodes": [
+          "CPU_UNDER_UTILIZED"
+        ],
+        "TerminateRecommendationDetail": {
+          "EstimatedMonthlySavings": "60.74",
+          "CurrencyCode": "USD"
+        }
+      },
+      {
+        "AccountId": "111111111111",
+        "CurrentInstance": {
+          "ResourceId": "i-0a1b2c3d4e5f60004",
+          "InstanceName": "legacy-etl",
+          "Tags": [
+            {
+              "Key": "ManagedBy",
+              "Values": [
+                "terraform"
+              ]
+            },
+            {
+              "Key": "tf_address",
+              "Values": [
+                "aws_instance.legacy_etl"
+              ]
+            }
+          ],
+          "ResourceDetails": {
+            "EC2ResourceDetails": {
+              "InstanceType": "r5.xlarge",
+              "Region": "us-east-1",
+              "Platform": "Linux/UNIX",
+              "Sku": "",
+              "Memory": 32,
+              "NetworkPerformance": "Up to 10 Gigabit"
+            }
+          },
+          "ResourceUtilization": {
+            "EC2ResourceUtilization": {
+              "MaxCpuUtilizationPercentage": "2.1",
+              "MaxMemoryUtilizationPercentage": "0",
+              "MaxStorageUtilizationPercentage": "0"
+            }
+          },
+          "OnDemandHoursInLookbackPeriod": "336.0",
+          "ReservationCoveredHoursInLookbackPeriod": "0.0",
+          "SavingsPlansCoveredHoursInLookbackPeriod": "0.0",
+          "TotalRunningHoursInLookbackPeriod": "336.0",
+          "MonthlyCost": "183.96",
+          "CurrencyCode": "USD"
+        },
+        "RightsizingType": "TERMINATE",
+        "FindingReasonCodes": [
+          "CPU_UNDER_UTILIZED"
+        ],
+        "TerminateRecommendationDetail": {
+          "EstimatedMonthlySavings": "183.96",
+          "CurrencyCode": "USD"
+        }
+      },
+      {
+        "AccountId": "222222222222",
+        "CurrentInstance": {
+          "ResourceId": "i-0b2c3d4e5f6a70005",
+          "InstanceName": "orders-service",
+          "Tags": [
+            {
+              "Key": "ManagedBy",
+              "Values": [
+                "terraform"
+              ]
+            },
+            {
+              "Key": "tf_address",
+              "Values": [
+                "aws_instance.orders"
+              ]
+            }
+          ],
+          "ResourceDetails": {
+            "EC2ResourceDetails": {
+              "InstanceType": "m5.xlarge",
+              "Region": "eu-west-1",
+              "Platform": "Linux/UNIX",
+              "Sku": "",
+              "Memory": 16,
+              "NetworkPerformance": "Up to 10 Gigabit"
+            }
+          },
+          "ResourceUtilization": {
+            "EC2ResourceUtilization": {
+              "MaxCpuUtilizationPercentage": "14.6",
+              "MaxMemoryUtilizationPercentage": "0",
+              "MaxStorageUtilizationPercentage": "0"
+            }
+          },
+          "OnDemandHoursInLookbackPeriod": "336.0",
+          "ReservationCoveredHoursInLookbackPeriod": "0.0",
+          "SavingsPlansCoveredHoursInLookbackPeriod": "0.0",
+          "TotalRunningHoursInLookbackPeriod": "336.0",
+          "MonthlyCost": "140.16",
+          "CurrencyCode": "USD"
+        },
+        "RightsizingType": "MODIFY",
+        "FindingReasonCodes": [
+          "CPU_OVER_PROVISIONED"
+        ],
+        "ModifyRecommendationDetail": {
+          "TargetInstances": [
+            {
+              "EstimatedMonthlyCost": "70.08",
+              "EstimatedMonthlySavings": "70.08",
+              "CurrencyCode": "USD",
+              "DefaultTargetInstance": true,
+              "ResourceDetails": {
+                "EC2ResourceDetails": {
+                  "InstanceType": "m5.large",
+                  "Region": "eu-west-1",
+                  "Platform": "Linux/UNIX"
+                }
+              },
+              "ExpectedResourceUtilization": {
+                "EC2ResourceUtilization": {
+                  "MaxCpuUtilizationPercentage": "29.2"
+                }
+              },
+              "PlatformDifferences": []
+            }
+          ]
+        }
+      },
+      {
+        "AccountId": "222222222222",
+        "CurrentInstance": {
+          "ResourceId": "i-0b2c3d4e5f6a70006",
+          "InstanceName": "staging-app",
+          "Tags": [
+            {
+              "Key": "ManagedBy",
+              "Values": [
+                "terraform"
+              ]
+            },
+            {
+              "Key": "tf_address",
+              "Values": [
+                "aws_instance.staging_app"
+              ]
+            }
+          ],
+          "ResourceDetails": {
+            "EC2ResourceDetails": {
+              "InstanceType": "t3.xlarge",
+              "Region": "eu-west-1",
+              "Platform": "Linux/UNIX",
+              "Sku": "",
+              "Memory": 16,
+              "NetworkPerformance": "Up to 10 Gigabit"
+            }
+          },
+          "ResourceUtilization": {
+            "EC2ResourceUtilization": {
+              "MaxCpuUtilizationPercentage": "6.3",
+              "MaxMemoryUtilizationPercentage": "0",
+              "MaxStorageUtilizationPercentage": "0"
+            }
+          },
+          "OnDemandHoursInLookbackPeriod": "336.0",
+          "ReservationCoveredHoursInLookbackPeriod": "0.0",
+          "SavingsPlansCoveredHoursInLookbackPeriod": "0.0",
+          "TotalRunningHoursInLookbackPeriod": "336.0",
+          "MonthlyCost": "121.47",
+          "CurrencyCode": "USD"
+        },
+        "RightsizingType": "MODIFY",
+        "FindingReasonCodes": [
+          "CPU_OVER_PROVISIONED"
+        ],
+        "ModifyRecommendationDetail": {
+          "TargetInstances": [
+            {
+              "EstimatedMonthlyCost": "30.37",
+              "EstimatedMonthlySavings": "91.10",
+              "CurrencyCode": "USD",
+              "DefaultTargetInstance": true,
+              "ResourceDetails": {
+                "EC2ResourceDetails": {
+                  "InstanceType": "t3.medium",
+                  "Region": "eu-west-1",
+                  "Platform": "Linux/UNIX"
+                }
+              },
+              "ExpectedResourceUtilization": {
+                "EC2ResourceUtilization": {
+                  "MaxCpuUtilizationPercentage": "12.6"
+                }
+              },
+              "PlatformDifferences": []
+            }
+          ]
+        }
+      }
+    ],
+    "Summary": {
+      "TotalRecommendationCount": "6",
+      "EstimatedTotalMonthlySavingsAmount": "988.42",
+      "SavingsCurrencyCode": "USD",
+      "SavingsPercentage": "77.0"
+    }
+  },
+  "optimizationHub": {
+    "items": [
+      {
+        "resourceId": "vol-0c1d2e3f40001",
+        "resourceArn": "arn:aws:ec2:us-east-1:111111111111:volume/vol-0c1d2e3f40001",
+        "accountId": "111111111111",
+        "region": "us-east-1",
+        "currentResourceType": "EbsVolume",
+        "actionType": "Delete",
+        "currentResourceSummary": "gp2 500 GB, unattached 47 days",
+        "recommendedResourceSummary": "Delete after snapshot",
+        "estimatedMonthlyCost": "50.00",
+        "estimatedMonthlySavings": "50.00",
+        "estimatedSavingsPercentage": 100.0,
+        "currencyCode": "USD",
+        "implementationEffort": "Low",
+        "restartNeeded": false,
+        "rollbackPossible": true,
+        "lastRefreshTimestamp": "2026-10-24T06:00:00Z",
+        "tags": {
+          "ManagedBy": "terraform",
+          "tf_address": "aws_ebs_volume.old_data"
+        },
+        "details": {
+          "state": "available",
+          "attachedInstance": null,
+          "daysUnattached": 47
+        }
+      },
+      {
+        "resourceId": "vol-0c1d2e3f40002",
+        "resourceArn": "arn:aws:ec2:us-east-1:111111111111:volume/vol-0c1d2e3f40002",
+        "accountId": "111111111111",
+        "region": "us-east-1",
+        "currentResourceType": "EbsVolume",
+        "actionType": "Upgrade",
+        "currentResourceSummary": "gp2 1000 GB",
+        "recommendedResourceSummary": "gp3 1000 GB",
+        "estimatedMonthlyCost": "100.00",
+        "estimatedMonthlySavings": "20.00",
+        "estimatedSavingsPercentage": 20.0,
+        "currencyCode": "USD",
+        "implementationEffort": "VeryLow",
+        "restartNeeded": false,
+        "rollbackPossible": true,
+        "lastRefreshTimestamp": "2026-10-24T06:00:00Z",
+        "tags": {
+          "ManagedBy": "terraform",
+          "tf_address": "aws_ebs_volume.db_data"
+        },
+        "details": {
+          "state": "in-use",
+          "attachedInstance": "i-0a1b2c3d4e5f60001"
+        }
+      },
+      {
+        "resourceId": "eipalloc-0d1e2f3a40001",
+        "resourceArn": "arn:aws:ec2:us-east-1:111111111111:elastic-ip/eipalloc-0d1e2f3a40001",
+        "accountId": "111111111111",
+        "region": "us-east-1",
+        "currentResourceType": "ElasticIp",
+        "actionType": "Delete",
+        "currentResourceSummary": "Unassociated Elastic IP",
+        "recommendedResourceSummary": "Release",
+        "estimatedMonthlyCost": "3.65",
+        "estimatedMonthlySavings": "3.65",
+        "estimatedSavingsPercentage": 100.0,
+        "currencyCode": "USD",
+        "implementationEffort": "VeryLow",
+        "restartNeeded": false,
+        "rollbackPossible": false,
+        "lastRefreshTimestamp": "2026-10-24T06:00:00Z",
+        "tags": {
+          "ManagedBy": "terraform",
+          "tf_address": "aws_eip.legacy"
+        },
+        "details": {
+          "association": null,
+          "daysUnassociated": 62
+        }
+      },
+      {
+        "resourceId": "nat-0e1f2a3b40001",
+        "resourceArn": "arn:aws:ec2:us-east-1:111111111111:natgateway/nat-0e1f2a3b40001",
+        "accountId": "111111111111",
+        "region": "us-east-1",
+        "currentResourceType": "NatGateway",
+        "actionType": "Delete",
+        "currentResourceSummary": "NAT gateway, 0.2 GB out in 14 days",
+        "recommendedResourceSummary": "Delete",
+        "estimatedMonthlyCost": "32.85",
+        "estimatedMonthlySavings": "32.85",
+        "estimatedSavingsPercentage": 100.0,
+        "currencyCode": "USD",
+        "implementationEffort": "Medium",
+        "restartNeeded": false,
+        "rollbackPossible": true,
+        "lastRefreshTimestamp": "2026-10-24T06:00:00Z",
+        "tags": {
+          "ManagedBy": "terraform",
+          "tf_address": "aws_nat_gateway.unused_az"
+        },
+        "details": {
+          "bytesOutLast14Days": 214748364,
+          "subnet": "subnet-0aa11bb22cc33dd44"
+        }
+      },
+      {
+        "resourceId": "snap-0f1a2b3c40001",
+        "resourceArn": "arn:aws:ec2:us-east-1:111111111111:snapshot/snap-0f1a2b3c40001",
+        "accountId": "111111111111",
+        "region": "us-east-1",
+        "currentResourceType": "EbsSnapshot",
+        "actionType": "Delete",
+        "currentResourceSummary": "800 GB snapshot, 412 days old",
+        "recommendedResourceSummary": "Delete",
+        "estimatedMonthlyCost": "40.00",
+        "estimatedMonthlySavings": "40.00",
+        "estimatedSavingsPercentage": 100.0,
+        "currencyCode": "USD",
+        "implementationEffort": "VeryLow",
+        "restartNeeded": false,
+        "rollbackPossible": false,
+        "lastRefreshTimestamp": "2026-10-24T06:00:00Z",
+        "tags": {
+          "ManagedBy": "terraform",
+          "tf_address": "aws_ebs_snapshot.pre_migration"
+        },
+        "details": {
+          "ageDays": 412,
+          "sourceVolumeExists": false
+        }
+      },
+      {
+        "resourceId": "orders-db",
+        "resourceArn": "arn:aws:rds:eu-west-1:222222222222:db:orders-db",
+        "accountId": "222222222222",
+        "region": "eu-west-1",
+        "currentResourceType": "RdsDbInstance",
+        "actionType": "Rightsize",
+        "currentResourceSummary": "db.r5.2xlarge, max CPU 18%",
+        "recommendedResourceSummary": "db.r5.xlarge",
+        "estimatedMonthlyCost": "700.80",
+        "estimatedMonthlySavings": "350.40",
+        "estimatedSavingsPercentage": 50.0,
+        "currencyCode": "USD",
+        "implementationEffort": "High",
+        "restartNeeded": true,
+        "rollbackPossible": true,
+        "lastRefreshTimestamp": "2026-10-24T06:00:00Z",
+        "tags": {
+          "ManagedBy": "terraform",
+          "tf_address": "aws_db_instance.orders"
+        },
+        "details": {
+          "engine": "postgres",
+          "multiAz": true,
+          "maxCpu14Days": 18.2
+        }
+      },
+      {
+        "resourceId": "app/internal-tools/50dc6c495c0c9188",
+        "resourceArn": "arn:aws:elasticloadbalancing:eu-west-1:222222222222:loadbalancer/app/internal-tools/50dc6c495c0c9188",
+        "accountId": "222222222222",
+        "region": "eu-west-1",
+        "currentResourceType": "ElbLoadBalancer",
+        "actionType": "Delete",
+        "currentResourceSummary": "ALB, 0 requests in 30 days",
+        "recommendedResourceSummary": "Delete",
+        "estimatedMonthlyCost": "16.43",
+        "estimatedMonthlySavings": "16.43",
+        "estimatedSavingsPercentage": 100.0,
+        "currencyCode": "USD",
+        "implementationEffort": "Low",
+        "restartNeeded": false,
+        "rollbackPossible": true,
+        "lastRefreshTimestamp": "2026-10-24T06:00:00Z",
+        "tags": {
+          "ManagedBy": "terraform",
+          "tf_address": "aws_lb.internal_tools"
+        },
+        "details": {
+          "requestsLast30Days": 0
+        }
+      },
+      {
+        "resourceId": "vol-0c1d2e3f40003",
+        "resourceArn": "arn:aws:ec2:eu-west-1:222222222222:volume/vol-0c1d2e3f40003",
+        "accountId": "222222222222",
+        "region": "eu-west-1",
+        "currentResourceType": "EbsVolume",
+        "actionType": "Delete",
+        "currentResourceSummary": "gp3 200 GB, unattached 120 days",
+        "recommendedResourceSummary": "Delete after snapshot",
+        "estimatedMonthlyCost": "16.00",
+        "estimatedMonthlySavings": "16.00",
+        "estimatedSavingsPercentage": 100.0,
+        "currencyCode": "USD",
+        "implementationEffort": "Low",
+        "restartNeeded": false,
+        "rollbackPossible": true,
+        "lastRefreshTimestamp": "2026-10-24T06:00:00Z",
+        "tags": {
+          "ManagedBy": "terraform",
+          "tf_address": "aws_ebs_volume.scratch"
+        },
+        "details": {
+          "state": "available",
+          "attachedInstance": null,
+          "daysUnattached": 120
+        }
+      }
+    ],
+    "summary": {
+      "totalRecommendationCount": 8,
+      "estimatedTotalMonthlySavings": "529.33",
+      "currencyCode": "USD"
+    }
+  },
+  "totals": {
+    "estimatedMonthlySavingsUsd": 1517.75,
+    "recommendationCount": 14
+  }
+}

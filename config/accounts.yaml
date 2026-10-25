@@ -1,0 +1,17 @@
+# Prototype: two demo accounts backed by the dummy Cost Explorer data.
+# For a real single-account run, use one entry with sources: [aws] and no role_arn.
+accounts:
+  - id: "111111111111"
+    name: costwarden-prototype
+    region: us-east-1
+    tf_path: sample_terraform/account_a
+    repo: costwarden-sandbox
+    sources: [cost_explorer]
+    data_file: data/dummy_cost_explorer.json
+  - id: "222222222222"
+    name: costwarden-secondary
+    region: eu-west-1
+    tf_path: sample_terraform/account_b
+    repo: costwarden-sandbox
+    sources: [cost_explorer]
+    data_file: data/dummy_cost_explorer.json

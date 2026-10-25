@@ -24,3 +24,20 @@ output "demo_waste" {
     allocation_id = join("", aws_eip.demo_unassociated[*].id)
   }
 }
+
+output "checkpoint_table_name" {
+  value = aws_dynamodb_table.checkpoints.name
+}
+
+output "supervisor_function" {
+  description = "Set AGENT_RUNTIME=lambda and AGENT_FUNCTION_PREFIX=costwarden to make the Streamlit app call this."
+  value       = aws_lambda_function.supervisor.function_name
+}
+
+output "agent_functions" {
+  value = [for f in aws_lambda_function.agent : f.function_name]
+}
+
+output "package_bucket" {
+  value = aws_s3_bucket.package.id
+}

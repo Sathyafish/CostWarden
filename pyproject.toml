@@ -1,0 +1,18 @@
+[project]
+name = "costwarden"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "langgraph", "langchain-core", "langchain-ollama", "langchain-openai",
+  "boto3", "python-hcl2", "PyGithub", "pyyaml", "python-dotenv",
+]
+
+[project.optional-dependencies]
+ui = ["streamlit", "pandas"]
+dev = ["pytest", "moto[ec2,dynamodb,cloudwatch,sts]"]
+
+[tool.setuptools.packages.find]
+include = ["costwarden*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

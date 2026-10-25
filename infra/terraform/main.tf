@@ -2,6 +2,8 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
+data "aws_caller_identity" "current" {}
+
 # Cleanup history: one item per cleanup run per account.
 resource "aws_dynamodb_table" "cleanups" {
   name         = var.table_name
@@ -41,6 +43,21 @@ data "aws_iam_policy_document" "app" {
       "dynamodb:Scan",
     ]
     resources = [aws_dynamodb_table.cleanups.arn]
+  }
+
+  statement {
+    sid = "CheckpointTable"
+    actions = [
+      "dynamodb:PutItem",
+      "dynamodb:GetItem",
+    ]
+    resources = [aws_dynamodb_table.checkpoints.arn]
+  }
+
+  statement {
+    sid       = "InvokeCostWardenFunctions"
+    actions   = ["lambda:InvokeFunction"]
+    resources = ["arn:aws:lambda:${var.region}:${data.aws_caller_identity.current.account_id}:function:costwarden-*"]
   }
 
   statement {

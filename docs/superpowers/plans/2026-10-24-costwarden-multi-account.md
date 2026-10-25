@@ -20,6 +20,18 @@
 - Spec clarification: the spec lists one interrupt after `open_pr`, but the write rule requires approval before the push. This plan uses two interrupts: approve the diff before `open_pr`, confirm the PR is merged before `execute`.
 - Tests never need the Ollama server (fake LLM) or real AWS or GitHub (moto, fake GitHub client).
 
+## Implementation notes (2026-10-24)
+
+The plan was executed with these deviations from the text below:
+
+- **Lambda deployment** is now in scope: four agent Lambdas plus a supervisor Lambda, deployed by `infra/terraform/lambda.tf` (replaces Task 11A's "template only").
+- **Checkpointer:** a small DynamoDB-backed `InMemorySaver` subclass (`costwarden/checkpoint.py`) replaces SQLite, because Lambda has no durable disk.
+- **Terraform replaces CloudFormation** for the history table.
+- **Fan-out:** discovery runs in parallel threads inside one node; per-account approval is sequential (LangGraph parallel interrupts add complexity for no demo value).
+- **Refactor returns file contents and a diff** and writes nothing; the PR agent commits them. Terraform comes from a `TfSource` (local directory or GitHub repo).
+- **Extra discovery source:** `cost_explorer` reads the dummy export in `data/`.
+- Not done: the Task 12 submission documents (project doc, demo script) and live verification against Ollama, GitHub and a deployed stack.
+
 ## Review focus
 
 - Account whose STS assume-role fails: error recorded, other accounts still processed (Task 9).
