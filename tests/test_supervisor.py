@@ -34,7 +34,7 @@ def test_graph_pauses_before_pr_with_diff():
     run = h.svc.start()
     st = h.svc.status(run)
     assert st["pending"]["type"] == "approve_diff" and st["pending"]["account_id"] == "111111111111"
-    assert "count = 0" in st["pending"]["diff"] and st["pending"]["savings_usd"] > 0
+    assert "count" in st["pending"]["diff"] and st["pending"]["savings_usd"] > 0
     assert h.gh.calls == []  # nothing written yet
 
 

@@ -37,9 +37,9 @@ def test_status_question():
     assert a.tool == "cleanups_by_status" and "https://pr/2" in a.text
 
 
-def test_top_resource_types():
+def test_top_resource_types_counts_merged_only():
     a = answer("which resource types save the most?", seeded(), FakeLLM())
-    assert a.tool == "top_resource_types" and a.text.index("EC2Instance") < a.text.index("EbsVolume")
+    assert a.tool == "top_resource_types" and "EbsVolume" in a.text and "EC2Instance" not in a.text
 
 
 def test_empty_store_does_not_invent_numbers():

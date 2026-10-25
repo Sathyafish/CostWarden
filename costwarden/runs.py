@@ -46,6 +46,7 @@ class RunService:
                 break
         return {
             "run_id": run_id,
+            "known": bool(v),
             "done": bool(v) and not snap.next,
             "pending": pending,
             "findings": {a: len(fs) for a, fs in v.get("findings", {}).items()},

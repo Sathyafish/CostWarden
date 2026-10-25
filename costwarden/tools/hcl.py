@@ -42,21 +42,26 @@ def find_block(text: str, address: str) -> tuple[int, int] | None:
 
 
 def set_attribute(block: str, attr: str, value) -> str | None:
-    """Set a top-level attribute inside a resource block; insert it if it is `count`."""
+    """Set a top-level attribute inside a resource block, keeping `terraform fmt` alignment.
+    `count` is inserted when missing; any other missing attribute returns None."""
     lines = block.split("\n")
-    body = next((l for l in lines[1:] if l.strip() and not l.strip().startswith("}")), "")
-    indent = body[: len(body) - len(body.lstrip())] or "  "
-    rendered = value if isinstance(value, int) else f'"{value}"'
-    pat = re.compile(rf"^{re.escape(indent)}{re.escape(attr)}\s*=")
+    body = [l for l in lines[1:] if l.strip() and not l.strip().startswith("}")]
+    first = body[0] if body else ""
+    indent = first[: len(first) - len(first.lstrip())] or "  "
+    rendered = str(value) if isinstance(value, int) else f'"{value}"'
+    pat = re.compile(rf"^({re.escape(indent)}{re.escape(attr)}\s*=\s*)(.*)$")
     for i, line in enumerate(lines):
-        if pat.match(line):
-            key = line.split("=")[0].rstrip()
-            lines[i] = f"{key} = {rendered}"
+        m = pat.match(line)
+        if m:
+            lines[i] = m.group(1) + rendered
             return "\n".join(lines)
-    if attr == "count":
-        lines.insert(1, f"{indent}count = {rendered}")
-        return "\n".join(lines)
-    return None
+    if attr != "count":
+        return None
+    # align the new `=` with the block's existing attribute column
+    col = first.index("=") if "=" in first and not first.lstrip().startswith("#") else None
+    key = attr.ljust(col - len(indent)) if col and col - len(indent) >= len(attr) else attr + " "
+    lines.insert(1, f"{indent}{key}= {rendered}")
+    return "\n".join(lines)
 
 
 def get_attribute(block: str, attr: str) -> str | None:

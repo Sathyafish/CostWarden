@@ -1,7 +1,7 @@
 from costwarden.accounts import Account
 from costwarden.store import CleanupRecord
 from costwarden.store.memory import MemoryStore
-from costwarden.ui.view_models import account_rows, savings_trend
+from costwarden.view_models import account_rows, savings_trend
 
 
 def store():

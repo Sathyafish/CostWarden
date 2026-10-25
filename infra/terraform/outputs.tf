@@ -41,3 +41,13 @@ output "agent_functions" {
 output "package_bucket" {
   value = aws_s3_bucket.package.id
 }
+
+output "api_url" {
+  description = "Paste into the app's Settings (or it is picked up from config.js when hosted)."
+  value       = aws_lambda_function_url.api.function_url
+}
+
+output "frontend_url" {
+  description = "Hosted React app (empty unless enable_frontend_hosting is true)."
+  value       = var.enable_frontend_hosting ? "https://${aws_cloudfront_distribution.frontend[0].domain_name}" : ""
+}

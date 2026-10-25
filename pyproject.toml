@@ -8,8 +8,8 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-ui = ["streamlit", "pandas"]
-dev = ["pytest", "moto[ec2,dynamodb,cloudwatch,sts]"]
+api = ["fastapi", "mangum", "uvicorn"]
+dev = ["pytest", "httpx", "moto[ec2,dynamodb,cloudwatch,sts]"]
 
 [tool.setuptools.packages.find]
 include = ["costwarden*"]

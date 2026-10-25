@@ -26,8 +26,9 @@ def test_maps_by_resource_id_fallback():
 def test_release_sets_count_zero_and_resize_sets_type():
     r = refactor(discover(A), SRC_A)
     new = r["files"]["main.tf"]
-    assert "count = 0" in new and 'instance_type = "m5.large"' in new
-    assert 'type = "gp3"' in new  # db_data gp2 -> gp3
+    assert new.count("count") == 6  # six releases
+    assert 'instance_type = "m5.large"' in new
+    assert 'type              = "gp3"' in new  # db_data gp2 -> gp3
     assert r["validation_ok"] and r["unmapped"] == []
     assert len(r["edited"]) == 9
     assert hcl.parses(new)
@@ -66,4 +67,19 @@ def test_existing_count_is_overwritten():
 
     f = Finding("1", "ElasticIp", "i", "arn", "r", 3.65, tf_address="aws_eip.a")
     r = refactor([f], Src())
-    assert "count = 0" in r["files"]["m.tf"] and "count  = 1" not in r["files"]["m.tf"]
+    assert "count  = 0" in r["files"]["m.tf"] and "count  = 1" not in r["files"]["m.tf"]
+
+
+def test_edits_keep_terraform_fmt_alignment():
+    r = refactor(discover(A), SRC_A)
+    new = r["files"]["main.tf"]
+    assert '  type              = "gp3"' in new  # replaced value keeps its column
+    assert "  count             = 0\n  availability_zone = " in new  # inserted count aligns with the block
+    assert '  count         = 0\n  ami           = ' in new
+    assert '  count  = 0\n  domain = "vpc"' in new
+
+
+def test_set_attribute_single_unaligned_block():
+    from costwarden.tools.hcl import set_attribute
+
+    assert set_attribute('resource "a" "b" {\n  x = 1\n}', "count", 0) == 'resource "a" "b" {\n  count = 0\n  x = 1\n}'

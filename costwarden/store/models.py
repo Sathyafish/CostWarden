@@ -48,6 +48,8 @@ def compute_metrics(records: list[CleanupRecord], now: datetime | None = None) -
     by_type: dict[str, dict] = {}
     for r in records:
         counts[r.status] = counts.get(r.status, 0) + 1
+        if r.status != "merged":
+            continue  # cost avoided by type counts merged cleanups only
         for res in r.resources:
             t = by_type.setdefault(res.get("resource_type", "unknown"), {"count": 0, "savings": 0.0})
             t["count"] += 1

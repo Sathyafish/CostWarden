@@ -30,6 +30,7 @@ The plan was executed with these deviations from the text below:
 - **Fan-out:** discovery runs in parallel threads inside one node; per-account approval is sequential (LangGraph parallel interrupts add complexity for no demo value).
 - **Refactor returns file contents and a diff** and writes nothing; the PR agent commits them. Terraform comes from a `TfSource` (local directory or GitHub repo).
 - **Extra discovery source:** `cost_explorer` reads the dummy export in `data/`.
+- **Frontend:** the Streamlit UI (Tasks 8 and 8B/8C screens) was replaced by a React app (`frontend/`) over a FastAPI backend (`costwarden/api/`), with the API deployed as `costwarden-api` behind a Lambda function URL and optional S3 + CloudFront hosting. Streamlit and its test were removed.
 - Not done: the Task 12 submission documents (project doc, demo script) and live verification against Ollama, GitHub and a deployed stack.
 
 ## Review focus

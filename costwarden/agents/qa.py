@@ -10,7 +10,7 @@ TOOLS = {
     "last_cleanup": "Most recent cleanup. args: account_id (optional)",
     "savings_between": "Total monthly cost avoided by merged cleanups. args: start, end (ISO timestamps, optional), account_id (optional)",
     "cleanups_by_status": "List cleanups with a status. args: status (proposed|merged|rejected|failed)",
-    "top_resource_types": "Resource types ranked by savings. args: n (optional)",
+    "top_resource_types": "Resource types ranked by cost avoided by merged cleanups. args: n (optional)",
 }
 PROMPT = """You answer questions about past cloud cost cleanups by choosing ONE tool.
 tools:

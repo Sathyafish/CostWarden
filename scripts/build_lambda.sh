@@ -9,7 +9,7 @@ mkdir -p build/package
 
 pip install --quiet --target build/package \
   --platform manylinux2014_x86_64 --implementation cp --python-version 3.12 --only-binary=:all: \
-  langgraph langchain-core langchain-ollama langchain-openai python-hcl2 PyGithub pyyaml python-dotenv
+  langgraph langchain-core langchain-ollama langchain-openai python-hcl2 PyGithub pyyaml python-dotenv fastapi mangum
 
 cp -R costwarden config data sample_terraform build/package/
 find build/package -name "__pycache__" -type d -prune -exec rm -rf {} +

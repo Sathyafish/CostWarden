@@ -63,6 +63,35 @@ variable "github_repo" {
   default     = ""
 }
 
+variable "api_key" {
+  description = "Shared secret the React app sends as x-api-key (16+ characters). The API URL is public, so this is the only gate on starting runs; treat it as demo-level protection."
+  type        = string
+  sensitive   = true
+
+  validation {
+    condition     = length(var.api_key) >= 16
+    error_message = "api_key must be at least 16 characters."
+  }
+}
+
+variable "allow_demo_seed" {
+  description = "Allow POST /api/demo/seed to insert demo history into the real table. Leave false outside demos."
+  type        = bool
+  default     = false
+}
+
+variable "cors_origins" {
+  description = "Origins allowed to call the API from a browser. The CloudFront origin is added automatically when hosting is enabled."
+  type        = list(string)
+  default     = ["http://localhost:5173", "http://127.0.0.1:5173"]
+}
+
+variable "enable_frontend_hosting" {
+  description = "Host the built React app (frontend/dist) on S3 behind CloudFront. Run `npm run build` in frontend/ first."
+  type        = bool
+  default     = false
+}
+
 variable "member_role_name" {
   description = "Name of the read-only role the agents assume in other accounts (org mode). Unused in single-account mode."
   type        = string

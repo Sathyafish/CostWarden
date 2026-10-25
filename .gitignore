@@ -10,3 +10,6 @@ build/
 *.tfstate.*
 .terraform.lock.hcl
 *.egg-info/
+
+frontend/node_modules/
+frontend/dist/

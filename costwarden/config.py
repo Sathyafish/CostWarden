@@ -23,6 +23,9 @@ class Settings:
     agent_function_prefix: str = "costwarden"
     tf_source: str = "local"
     github_base_branch: str = "main"
+    api_key: str | None = None
+    cors_origins: tuple[str, ...] = ("http://localhost:5173", "http://127.0.0.1:5173")
+    allow_demo_seed: bool = False
 
 
 def load_settings(env: dict | None = None) -> Settings:
@@ -59,4 +62,8 @@ def load_settings(env: dict | None = None) -> Settings:
         agent_function_prefix=get("AGENT_FUNCTION_PREFIX", d.agent_function_prefix),
         tf_source=get("TF_SOURCE", d.tf_source),
         github_base_branch=get("GITHUB_BASE_BRANCH", d.github_base_branch),
+        api_key=env.get("API_KEY") or None,
+        cors_origins=tuple(o.strip() for o in env["CORS_ORIGINS"].split(",") if o.strip())
+        if env.get("CORS_ORIGINS") else d.cors_origins,
+        allow_demo_seed=str(env.get("ALLOW_DEMO_SEED", "")).lower() in ("1", "true", "yes"),
     )

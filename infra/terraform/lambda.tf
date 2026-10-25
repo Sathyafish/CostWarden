@@ -2,6 +2,11 @@
 # Build the package first: scripts/build_lambda.sh (writes build/lambda.zip).
 
 locals {
+  cors_origins = concat(
+    var.cors_origins,
+    var.enable_frontend_hosting ? ["https://${aws_cloudfront_distribution.frontend[0].domain_name}"] : [],
+  )
+
   agents = {
     discover = { handler = "costwarden.lambda_handlers.discover_handler", timeout = 300 }
     refactor = { handler = "costwarden.lambda_handlers.refactor_handler", timeout = 300 }
@@ -62,7 +67,7 @@ resource "aws_s3_object" "package" {
 }
 
 resource "aws_cloudwatch_log_group" "fn" {
-  for_each          = toset(concat([for k, _ in local.agents : "costwarden-${k}"], ["costwarden-supervisor"]))
+  for_each          = toset(concat([for k, _ in local.agents : "costwarden-${k}"], ["costwarden-supervisor", "costwarden-api"]))
   name              = "/aws/lambda/${each.key}"
   retention_in_days = 14
 }
@@ -112,4 +117,55 @@ resource "aws_lambda_function" "supervisor" {
   }
 
   depends_on = [aws_cloudwatch_log_group.fn, aws_iam_role_policy_attachment.lambda_logs]
+}
+
+# HTTP API for the React app: one Lambda (FastAPI via Mangum) behind a function URL.
+# Function URLs have no 30 second limit, so a run that scans several accounts is not cut off.
+# Authentication is the shared x-api-key checked inside the app; CORS is handled by the app too,
+# so the URL itself sets no CORS headers.
+resource "aws_lambda_function" "api" {
+  function_name = "costwarden-api"
+  role          = aws_iam_role.lambda.arn
+  runtime       = "python3.12"
+  architectures = ["x86_64"]
+  handler       = "costwarden.api.lambda_api.handler"
+  timeout       = 900
+  memory_size   = 1024
+
+  s3_bucket        = aws_s3_bucket.package.id
+  s3_key           = aws_s3_object.package.key
+  source_code_hash = filebase64sha256(var.lambda_zip_path)
+
+  environment {
+    variables = merge(local.common_env, {
+      AGENT_RUNTIME         = "lambda"
+      AGENT_FUNCTION_PREFIX = "costwarden"
+      API_KEY               = var.api_key
+      CORS_ORIGINS          = join(",", local.cors_origins)
+      ALLOW_DEMO_SEED       = tostring(var.allow_demo_seed)
+    })
+  }
+
+  depends_on = [aws_cloudwatch_log_group.fn, aws_iam_role_policy_attachment.lambda_logs]
+}
+
+resource "aws_lambda_function_url" "api" {
+  function_name      = aws_lambda_function.api.function_name
+  authorization_type = "NONE"
+}
+
+resource "aws_lambda_permission" "api_url" {
+  statement_id           = "AllowPublicFunctionUrl"
+  action                 = "lambda:InvokeFunctionUrl"
+  function_name          = aws_lambda_function.api.function_name
+  principal              = "*"
+  function_url_auth_type = "NONE"
+}
+
+resource "aws_lambda_permission" "api_url_invoke" {
+  statement_id             = "AllowPublicInvokeViaUrl"
+  action                   = "lambda:InvokeFunction"
+  function_name            = aws_lambda_function.api.function_name
+  principal                = "*"
+  invoked_via_function_url = true
 }
