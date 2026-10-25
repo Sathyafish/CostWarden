@@ -10,17 +10,18 @@
 
   <!-- Frontend -->
   <rect x="20" y="80" width="210" height="330" rx="8" fill="#f4f7fb" stroke="#4a6fa5"/>
-  <text x="125" y="102" text-anchor="middle" font-weight="bold" fill="#234">Streamlit frontend</text>
+  <text x="125" y="102" text-anchor="middle" font-weight="bold" fill="#234">React app (Vite)</text>
   <rect x="38" y="120" width="174" height="56" rx="6" fill="#fff" stroke="#4a6fa5"/>
-  <text x="125" y="144" text-anchor="middle">Dashboard</text>
+  <text x="125" y="144" text-anchor="middle">Overview</text>
   <text x="125" y="162" text-anchor="middle" font-size="11" fill="#555">cost avoided per account</text>
   <rect x="38" y="196" width="174" height="56" rx="6" fill="#fff" stroke="#4a6fa5"/>
   <text x="125" y="220" text-anchor="middle">Ask prompt</text>
   <text x="125" y="238" text-anchor="middle" font-size="11" fill="#555">"last cleanup, savings?"</text>
   <rect x="38" y="272" width="174" height="56" rx="6" fill="#fff" stroke="#4a6fa5"/>
-  <text x="125" y="296" text-anchor="middle">Run and approvals</text>
+  <text x="125" y="296" text-anchor="middle">Runs and approvals</text>
   <text x="125" y="314" text-anchor="middle" font-size="11" fill="#555">approve diff, confirm merge</text>
-  <text x="125" y="362" text-anchor="middle" font-size="11" fill="#555">Engineer / FinOps user</text>
+  <text x="125" y="362" text-anchor="middle" font-size="11" fill="#555">Engineer / FinOps / leadership</text>
+  <text x="125" y="382" text-anchor="middle" font-size="11" fill="#555">via FastAPI Lambda (function URL)</text>
 
   <!-- Agent runtime -->
   <rect x="270" y="80" width="430" height="320" rx="8" fill="#f6f9f4" stroke="#5b8a49"/>
@@ -83,7 +84,7 @@
 
   <!-- Arrows -->
   <line x1="230" y1="224" x2="268" y2="224" stroke="#444" marker-end="url(#arrow)"/>
-  <text x="249" y="214" text-anchor="middle" font-size="10" fill="#555">run</text>
+  <text x="249" y="214" text-anchor="middle" font-size="10" fill="#555">API</text>
   <line x1="220" y1="410" x2="290" y2="450" stroke="#444" marker-end="url(#arrow)"/>
   <text x="195" y="436" text-anchor="middle" font-size="10" fill="#555">read history</text>
   <line x1="438" y1="141" x2="460" y2="141" stroke="#444" marker-end="url(#arrow)"/>
