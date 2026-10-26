@@ -132,6 +132,7 @@ terraform init
 terraform apply -var api_key=$(openssl rand -hex 16) -var nebius_api_key=... -var github_token=... -var github_repo=owner/costwarden-sandbox
 ```
 
+- The stack needs AWS provider 6.28.0 or later (for the function URL permission). If you applied an earlier version before, run `terraform init -upgrade` first.
 - `build_lambda.sh` writes `build/lambda.zip` (Linux x86_64, Python 3.12). Run it before `terraform apply`.
 - `api_key` is required (16 or more characters). Keep the value: you enter it in the app's Settings.
 - Leave `github_repo` empty to use a fake GitHub client. The Lambdas then bundle the sample Terraform and open no real PRs.
