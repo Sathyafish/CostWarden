@@ -16,7 +16,7 @@ My agent helps a cloud or FinOps engineer remove idle AWS waste in a Streamlit a
 
 ## Architecture
 
-Supervisor ("Zeve") is a LangGraph `StateGraph` with a SQLite checkpointer.
+Supervisor ("Jev") is a LangGraph `StateGraph` with a SQLite checkpointer.
 
 1. `load_accounts` reads the registry.
 2. Fan-out `discover` per account via `Send`.

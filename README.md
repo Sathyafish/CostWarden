@@ -22,7 +22,7 @@ My agent helps a cloud or FinOps engineer remove idle AWS waste in a web app, re
 |---|---|
 | React app (`frontend/`) | Overview dashboard (cost avoided per account), Ask prompt (questions about past cleanups) and the run and approval screens. See [Frontend and API](#frontend-and-api). |
 | FastAPI backend (`costwarden/api/`) | The HTTP API the React app calls. Runs locally with `uvicorn`, or as the `costwarden-api` Lambda behind a function URL. |
-| Supervisor "Zeve" | LangGraph state machine. Discovers all accounts in parallel, then works through accounts one at a time and pauses at human approval gates. Checkpoints go to DynamoDB so a pause survives across Lambda calls. |
+| Supervisor "Jev" | LangGraph state machine. Discovers all accounts in parallel, then works through accounts one at a time and pauses at human approval gates. Checkpoints go to DynamoDB so a pause survives across Lambda calls. |
 | Discovery, Refactoring, VCS and PR, Execution agents | The four worker agents (roles below). Each runs in-process locally or as its own Lambda (`costwarden-discover`, `-refactor`, `-open_pr`, `-execute`), with the supervisor Lambda `costwarden-supervisor` in front. |
 | DynamoDB `costwarden-cleanups` | History of every cleanup: account, resources, monthly savings, PR URL and status. Feeds the dashboard and the prompt. |
 | LLM via `get_llm()` | Ollama (`llama3.1`) by default; Nebius Token Factory as a second provider. |
@@ -48,7 +48,7 @@ The agents never apply changes directly and never delete resources through the A
 
 ## Agent roles and responsibilities
 
-### Supervisor agent ("Zeve")
+### Supervisor agent ("Jev")
 
 - Manages overall state transitions and routing.
 - Evaluates sub-agent outputs against acceptance criteria.
